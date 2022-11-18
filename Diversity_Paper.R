@@ -90,7 +90,7 @@ zoodatffg <- zoodat_orig %>%
   summarise(zoo_mean_biomass = log10(sum(biomass)/sum(density)),
             zoo_total_density = log10(sum(density)))
 
-### III. Merging CCSR datasets for trophic status  x trophic guild
+### III. Merging CCSR datasets for trophic status  x feeding gropu
 
 datzoo1 <- left_join(zoodatffg, keydat, by = "uid") 
 
