@@ -4,29 +4,30 @@
 setwd('~/Dropbox/Savina_size_scaling_project/1. data/NLA2012')
 
 # Libraries 
-library(dplyr)
-library(purrr)
-library(broom)
+# library(dplyr)
+# library(purrr)
+# library(broom)
 library(janitor)
-library(ggplot2)
+# library(ggplot2)
 library(ggthemes)
+library(tidyverse)
 
 # Read in data files
-chemdat <-  read.csv('nla2012_waterchem_wide.csv')
-physdat <- read.csv('nla2012_wide_profile_08232016.csv') %>%
+chemdat <-  read.csv('NLA2012/nla2012_waterchem_wide.csv')
+physdat <- read.csv('NLA2012/nla2012_wide_profile_08232016.csv') %>%
   clean_names()
-phytodat <- read.csv('nla2012_wide_phytoplankton_count_2020_04_25.csv') %>%
+phytodat <- read.csv('NLA2012/nla2012_wide_phytoplankton_count_2020_04_25.csv') %>%
   clean_names()
-zoodat_meta <- read.csv('nla2012_zooptaxa_wide_10272015.csv') %>%
+zoodat_meta <- read.csv('NLA2012/nla2012_zooptaxa_wide_10272015.csv') %>%
   select(TARGET_TAXON, FFG) %>%
   rename(feeding_group = FFG)
 
-keydat <- read.csv('nla_2012_condition_categories.csv') %>%
+keydat <- read.csv('NLA2012/nla_2012_condition_categories.csv') %>%
   select(UID, TROPHIC_STATE) %>%
   rename(trophic_state = TROPHIC_STATE) %>%
   rename(uid = UID)
 
-zoodat_orig <- read.csv('nla2012_wide_zooplankton_count_2020_04_30.csv') %>%
+zoodat_orig <- read.csv('NLA2012/nla2012_wide_zooplankton_count_2020_04_30.csv') %>%
   left_join(., zoodat_meta, by = 'TARGET_TAXON') %>%
   clean_names()
 
@@ -92,11 +93,11 @@ zoodatffg <- zoodat_orig %>%
 
 ### III. Merging CCSR datasets for trophic status  x feeding gropu
 
-datzoo1 <- left_join(zoodatffg, keydat, by = "uid") 
+datzoo_trophic_guild <- left_join(zoodatffg, keydat, by = "uid") 
 
 #DATASET FEEDING GROUP
 datzoo <- ccsr_mergedat %>%
-#filter(., feeding_group == 'HERB' | feeding_group == 'OMNI' | feeding_group == 'PRED') %>%
+filter(., feeding_group == 'HERB' | feeding_group == 'OMNI' | feeding_group == 'PRED') %>%
   filter(., trophic_state == 'Oligotrophic' | trophic_state == 'Mesotrophic' | trophic_state == 'Eutrophic'| trophic_state == 'Hypereutrophic') %>%
   filter(., zoo_total_density != 'NA') %>%
   filter(., zoo_mean_biomass != '-Inf')  %>%
@@ -115,7 +116,7 @@ ggplot(data = zoodatsummary,
   geom_smooth(color = "black", method = "lm", se = TRUE) + 
   labs(x = "log body size", y = "log abundance", color = "Legend") + theme_few()
 
-Your Walk di inglese che non sei#all group slope x trophic guild
+# Your Walk di inglese che non sei#all group slope x trophic guild
 slope <- lm(zoo_total_density ~ zoo_mean_biomass * feeding_group, datzoo)
 summary(slope)
 
@@ -128,14 +129,13 @@ summary(slope)
   summary(slope)
 
   #Figure 3
-  ggplot(datzoo, aes(zoo_mean_biomass, zoo_total_density, colour=feeding_group, fill=feeding_group)) + 
+ggplot(datzoo1, aes(zoo_mean_biomass, zoo_total_density, colour=feeding_group, fill=feeding_group)) + 
   geom_smooth(method="lm", se=FALSE, fullrange=TRUE) + 
   geom_point(size=1.5) + ylab("log abundance") + 
   xlab("log body size") + theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"), 
                                   text = element_text(size = 12, family = "Tahoma"), 
                                   axis.title = element_text(face="bold"), axis.text.x=element_text(size = 11), 
-                                  legend.position = "top") + theme_few() + 
-  scale_color_manual(values=c("blue", "green", "red")) + labs(fill = "trophic state")
+                                  legend.position = "top") + theme_few() + labs(fill = "trophic state")
   
   datzooffg <- zoodatffg %>%
   filter(., feeding_group == 'HERB' | feeding_group == 'OMNI' | feeding_group == 'PRED') %>%
