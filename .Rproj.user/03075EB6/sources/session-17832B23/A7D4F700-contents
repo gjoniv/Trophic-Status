@@ -1,0 +1,12 @@
+datzoo_trophic_guild_and_state %>% 
+  filter(is.na(log10_zoo_mean_biomass))
+
+zoodatffg %>% as_tibble() %>% 
+  filter(uid == 8266) %>% 
+  select(biomass, density, uid, feeding_group)
+
+
+zoodat_orig %>% as_tibble() %>% 
+  filter(uid == 8266) %>% select(biomass, density, uid, feeding_group) %>% 
+  filter(biomass != 0 & density != 0) %>% 
+  print(n = Inf)

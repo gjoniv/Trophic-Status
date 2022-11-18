@@ -1,0 +1,23 @@
+trophic_state_medians = biomass_sims_trophic %>% 
+  expand_grid(trophic_state = trophic_state_sims) %>% 
+  add_epred_draws(trophic_state_brm) %>% 
+  group_by(log10_zoo_mean_biomass_c, trophic_state) %>% 
+  median_qi()
+
+
+medians_original = trophic_feeding_conditional_posts %>% 
+  group_by(log10_zoo_mean_biomass_c, trophic_state, .draw) %>% 
+  summarize(.epred = mean(.epred)) %>% 
+  group_by(log10_zoo_mean_biomass_c, trophic_state) %>% 
+  median_qi(.epred)
+
+
+bind_rows(trophic_state_medians %>% mutate(model = "state only"),
+          medians_original %>% mutate(model = "averaged over feeding")) %>% 
+  ggplot(aes(x = log10_zoo_mean_biomass_c, y = .epred, fill = model, color = model)) + 
+  geom_line() +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
+  facet_wrap(~trophic_state)
+
+plot(conditional_effects(trophic_guild_and_state_brm, effects = "log10_zoo_mean_biomass_c:trophic_state"), points = T)
+plot(conditional_effects(trophic_state_brm, effects = "log10_zoo_mean_biomass_c:trophic_state"), points = T)

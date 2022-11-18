@@ -1,0 +1,9 @@
+ggplot() +
+  geom_point(data = datzoo_trophic_guild_and_state, aes(y = 10^log10_zoo_total_density_c, x = feeding_group)) +
+  scale_y_log10()
+
+
+datzoo_trophic_guild_and_state %>% 
+  group_by(feeding_group) %>% 
+  summarize(min = min(10^log10_zoo_mean_biomass),
+            max = max(10^log10_zoo_mean_biomass))
