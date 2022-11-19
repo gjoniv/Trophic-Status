@@ -5,6 +5,8 @@ library(tidybayes)
 # load models
 lake_level_brm = readRDS(file = "models/lake_level_brm.rds")
 trophic_guild_and_state_brm = readRDS(file = "models/trophic_guild_and_state_brm.rds")
+trophic_state_brm = readRDS(file = "models/trophic_state_brm.rds")
+
 
 # load data
 datzoo_trophic_state_only = readRDS(file = "data/datzoo_trophic_state_only.rds")
@@ -31,6 +33,9 @@ biomass_and_trophic_sims = biomass_sims_trophic %>%
   expand_grid(trophic_state = trophic_state_sims) %>% 
   expand_grid(feeding_group = feeding_group_sims)
 
+biomass_and_trophiconly_sims = biomass_sims_trophic %>% 
+  expand_grid(trophic_state = trophic_state_sims) 
+
 
 # sample posteriors and conditional posteriors
 
@@ -45,3 +50,9 @@ trophic_feeding_posts = as_draws_df(trophic_guild_and_state_brm) %>% saveRDS("po
 trophic_feeding_conditional_posts = biomass_and_trophic_sims %>% 
   add_epred_draws(trophic_guild_and_state_brm) %>% 
   saveRDS("posteriors/trophic_feeding_conditional_posts.rds")
+
+trophic_posts = as_draws_df(trophic_state_brm) %>% saveRDS("posteriors/trophic_posts.rds")
+
+trophic_conditional_posts = biomass_and_trophiconly_sims %>% 
+  add_epred_draws(trophic_state_brm) %>% 
+  saveRDS("posteriors/trophic_conditional_posts.rds")

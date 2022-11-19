@@ -17,9 +17,16 @@ lake_level_brm = brm(log10_zoo_total_density_c ~ log10_zoo_mean_biomass_c,
                      family = gaussian(),
                      prior = c(prior(normal(0, 1), class = "Intercept"),
                                prior(normal(-0.75, 0.1), class = "b")))
-
 saveRDS(lake_level_brm, file = "models/lake_level_brm.rds") 
 
+
+trophic_state_brm = brm(log10_zoo_total_density_c ~ log10_zoo_mean_biomass_c*trophic_state,
+                        data = datzoo_trophic_state_only,
+                        family = gaussian(),
+                        prior = c(prior(normal(0, 1), class = "Intercept"),
+                                  prior(normal(-0.75, 0.1), coef = "log10_zoo_mean_biomass_c"),
+                                  prior(normal(0, 1), class = "b")))
+saveRDS(trophic_state_brm, file = "models/trophic_state_brm.rds")
 
 
 trophic_guild_and_state_brm = brm(log10_zoo_total_density_c ~ log10_zoo_mean_biomass_c*feeding_group*trophic_state,
@@ -28,17 +35,8 @@ trophic_guild_and_state_brm = brm(log10_zoo_total_density_c ~ log10_zoo_mean_bio
                                   prior = c(prior(normal(0, 1), class = "Intercept"),
                                             prior(normal(-0.75, 0.1), coef = "log10_zoo_mean_biomass_c"),
                                             prior(normal(0, 1), class = "b")))
-
 saveRDS(trophic_guild_and_state_brm, file = "models/trophic_guild_and_state_brm.rds")
 
     
 
-trophic_state_brm = brm(log10_zoo_total_density_c ~ log10_zoo_mean_biomass_c*trophic_state,
-                        data = datzoo_trophic_guild_and_state,
-                        family = gaussian(),
-                        prior = c(prior(normal(0, 1), class = "Intercept"),
-                                  prior(normal(-0.75, 0.1), coef = "log10_zoo_mean_biomass_c"),
-                                  prior(normal(0, 1), class = "b")))
-  
-  
-saveRDS(trophic_state_brm, file = "models/trophic_state_brm.rds")
+
