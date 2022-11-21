@@ -1,0 +1,21 @@
+model,feeding_group,trophic_state,slope,intercept,group
+log_a ~ log_m,NA,NA,-0.5 (-0.55 to -0.45),0 (-0.04 to 0.04),main
+log_a ~ log_m*trophic*feeding,OMNI,average,-0.57 (-0.67 to -0.46),0.2 (0.12 to 0.29),main
+log_a ~ log_m*trophic*feeding,HERB,average,-0.41 (-0.5 to -0.32),0.7 (0.61 to 0.78),main
+log_a ~ log_m*trophic*feeding,PRED,average,-0.13 (-0.43 to 0.18),-0.79 (-1 to -0.58),main
+log_a ~ log_m*trophic,NA,Oligotrophic,-0.3 (-0.43 to -0.17),-0.44 (-0.53 to -0.35),interaction
+log_a ~ log_m*trophic,NA,Mesotrophic,-0.4 (-0.49 to -0.3),-0.08 (-0.13 to -0.02),interaction
+log_a ~ log_m*trophic,NA,Eutrophic,-0.46 (-0.54 to -0.37),0.08 (0.02 to 0.14),interaction
+log_a ~ log_m*trophic,NA,Hypereutrophic,-0.56 (-0.66 to -0.45),0.26 (0.19 to 0.33),interaction
+log_a ~ log_m*trophic*feeding,OMNI,Oligotrophic,-0.54 (-0.68 to -0.39),-0.38 (-0.5 to -0.27),interaction
+log_a ~ log_m*trophic*feeding,OMNI,Mesotrophic,-0.63 (-0.75 to -0.52),0.02 (-0.06 to 0.11),interaction
+log_a ~ log_m*trophic*feeding,OMNI,Eutrophic,-0.57 (-0.67 to -0.46),0.2 (0.12 to 0.29),interaction
+log_a ~ log_m*trophic*feeding,OMNI,Hypereutrophic,-0.77 (-0.89 to -0.66),0.64 (0.54 to 0.74),interaction
+log_a ~ log_m*trophic*feeding,HERB,Oligotrophic,-0.27 (-0.4 to -0.14),0.14 (-0.01 to 0.29),interaction
+log_a ~ log_m*trophic*feeding,HERB,Mesotrophic,-0.41 (-0.51 to -0.32),0.6 (0.52 to 0.69),interaction
+log_a ~ log_m*trophic*feeding,HERB,Eutrophic,-0.41 (-0.5 to -0.32),0.7 (0.61 to 0.78),interaction
+log_a ~ log_m*trophic*feeding,HERB,Hypereutrophic,-0.34 (-0.47 to -0.23),0.66 (0.56 to 0.76),interaction
+log_a ~ log_m*trophic*feeding,PRED,Oligotrophic,-0.49 (-0.8 to -0.18),-1.57 (-1.76 to -1.39),interaction
+log_a ~ log_m*trophic*feeding,PRED,Mesotrophic,0.28 (0 to 0.56),-0.76 (-0.93 to -0.58),interaction
+log_a ~ log_m*trophic*feeding,PRED,Eutrophic,-0.13 (-0.43 to 0.18),-0.79 (-1 to -0.58),interaction
+log_a ~ log_m*trophic*feeding,PRED,Hypereutrophic,0.04 (-0.33 to 0.44),-0.38 (-0.68 to -0.08),interaction
