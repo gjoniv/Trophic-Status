@@ -1,0 +1,21 @@
+model,trophic_state,feeding_group,slope,.lower,.upper,.width,.point,.interval
+log_a ~ log_m,NA,NA,-0.4989167551256021,-0.5534327562694975,-0.44770360479646965,0.95,median,qi
+log_a ~ log_m*trophic,Eutrophic,NA,-0.4556468872420061,-0.5417875721468596,-0.37138125061140714,0.95,median,qi
+log_a ~ log_m*trophic,Hypereutrophic,NA,-0.5558442139923236,-0.6589607549652571,-0.45473024355056896,0.95,median,qi
+log_a ~ log_m*trophic,Mesotrophic,NA,-0.3969119222421019,-0.4947236024874114,-0.2977919643436305,0.95,median,qi
+log_a ~ log_m*trophic,Oligotrophic,NA,-0.297857251664313,-0.42562872218486475,-0.17239354729037254,0.95,median,qi
+log_a ~ log_m*trophic*feeding,averaged over,HERB,-0.407765517954628,-0.49804547607038,-0.32025773121907575,0.95,median,qi
+log_a ~ log_m*trophic*feeding,averaged over,OMNI,-0.5653306127692548,-0.6692784593104878,-0.46099144280857535,0.95,median,qi
+log_a ~ log_m*trophic*feeding,averaged over,PRED,-0.12831850082717366,-0.43347700917931153,0.18339480180509793,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Eutrophic,HERB,-0.407765517954628,-0.49804547607038,-0.32025773121907575,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Eutrophic,OMNI,-0.5653306127692548,-0.6692784593104878,-0.46099144280857535,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Eutrophic,PRED,-0.12831850082717366,-0.43347700917931153,0.18339480180509793,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Hypereutrophic,HERB,-0.343165293297254,-0.4675460160167011,-0.23078523259084657,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Hypereutrophic,OMNI,-0.7727594781614666,-0.8923551802208773,-0.6596334615569521,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Hypereutrophic,PRED,0.04453522193331727,-0.33274456192236546,0.43554806556835024,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Mesotrophic,HERB,-0.41323056695019567,-0.5108353873588545,-0.31908285238455014,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Mesotrophic,OMNI,-0.6315647929534124,-0.7454144333797207,-0.515597120660475,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Mesotrophic,PRED,0.2807679125443885,-0.0032620994138975704,0.5578881680128323,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Oligotrophic,HERB,-0.27454104521026923,-0.4041722843436054,-0.144850047897287,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Oligotrophic,OMNI,-0.535762225322145,-0.6849649110941824,-0.3892415826117629,0.95,median,qi
+log_a ~ log_m*trophic*feeding,Oligotrophic,PRED,-0.49275274304316774,-0.8023253579645395,-0.18407887243715434,0.95,median,qi
